@@ -24,19 +24,20 @@ def load_data(filePath):
     except:
         return {}
 
-# accept only one command line 
-if len(sys.argv) == 2:
+# accept one or two arguments
+if len(sys.argv) == 2 or len(sys.argv) == 3:
     command = sys.argv[1]
     data = load_data(SAVED_FILE)
 
     if command == "save":
         key = input("Enter a key: ")
-        data[key] = copi.paste()
+        value = input("Enter the data you want to store: ")
+        data[key] = value
         save_data(SAVED_FILE, data)
         print("Data saved !")
 
     elif command == "load":
-        key = input("Enter a key: ")
+        key = sys.argv[2]
         if key in data:
             copi.copy(data[key])
             print("Data copied to clipboard !")
@@ -48,11 +49,11 @@ if len(sys.argv) == 2:
             print("clipboard.json is empty!")
         else:
             for key in data:
-                print(data[key], end=', ')
+                print(key + ": " + data[key])
 
     else:
         print("Unknown command !")
 else:
-    print("Please pass exactly one command !")
-
-
+    print('''Save data: "python multiClipboard.py save"
+\nLoad data to clipboard: "python multiClipboard.py load <key>"
+\nList all the keys and values: "python multiClipboard.py list"''')
