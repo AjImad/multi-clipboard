@@ -24,7 +24,7 @@ def load_data(filePath):
     except:
         return {}
 
-# accept only one command line
+# accept one or two arguments
 if len(sys.argv) == 2 or len(sys.argv) == 3:
     command = sys.argv[1]
     data = load_data(SAVED_FILE)
